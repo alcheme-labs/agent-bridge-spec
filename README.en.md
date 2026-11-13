@@ -12,7 +12,7 @@ Updated 2026-11-13. Deliverables include product/specification documents, the bi
 
 The specification is **normative draft 0.3** and the SDK is **reference design draft 0.3**. This revision adds delegated background decisions, structured-output guarantees, and main-task time/budget rules, retaining the prior specification/SDK separation and safety/recovery requirements. Consumer business responsibilities remain separate.
 
-The [draft 0.2 gap review](docs/reviews/2026-11-13-normative-gap-review.md) records two closed P2 document findings for that version, not this revision. The [draft 0.3 runtime-rules review](docs/reviews/2026-11-13-runtime-rules-review.md) records independent reviewers and a final judge finding no material document issue. Neither conclusion is runtime compatibility evidence. Actual first engine/host/connection products, a second real consumer, independent runtime integration, distribution, and licensing remain outstanding.
+The [draft 0.2 gap review](docs/reviews/2026-11-13-normative-gap-review.md) records two closed P2 document findings for that version, not this revision. The [draft 0.3 runtime-rules review](docs/reviews/2026-11-13-runtime-rules-review.md) records independent reviewers and a final judge finding no material document issue. Neither conclusion is runtime compatibility evidence. Actual first engine/host/connection products, a second real consumer, independent runtime integration, reference SDK distribution, and licensing review for future extracted code remain outstanding.
 
 The [2026-11-12 specification review](docs/reviews/2026-11-12-spec-review.md) and [2026-11-02 protocol review](docs/reviews/2026-11-02-protocol-review.md) retain their historical scope; they do not automatically approve newer versions.
 
@@ -47,7 +47,7 @@ Read product goals first, then the integration body. SDK design is relevant when
 
 Install using the complete repository layout and let the host read `skills/agent-bridge-integration`. Hosts supporting symlinks may link that real directory. Resolve the actual directory to read the matching body without another maintained specification copy. Copying just the Skill folder is insufficient. There is no separately published Skill installer/package; this work does not change locally installed Skills.
 
-For the initial version, clone the complete repository at its fixed tag or download that Release's source archive:
+For the initial version, use the [complete source package with license files](https://github.com/alcheme-labs/agent-bridge-spec/releases/download/agent-bridge-integration-v0.1.0/agent-bridge-spec-0.1.0.tar.gz). The original release tag predates the licensing supplement and remains unchanged. Its specification and Skill can also be obtained below; license files are available separately on the same Release:
 
 ```sh
 git clone --branch agent-bridge-integration-v0.1.0 https://github.com/alcheme-labs/agent-bridge-spec.git
@@ -70,10 +70,16 @@ Online verification must read actual published releases and separately check the
 
 Maintainers can manually run [Verify published Skill](https://github.com/alcheme-labs/agent-bridge-spec/actions/workflows/verify-skill-release.yml) against the specified newest published tag in an isolated environment. Alternatively run `python3 -B tests/verify_skill_updates_online.py`. It uses the anonymous API and temporary state, simulates an older version, and neither installs updates nor modifies published source. This requires network access and is separate from the default offline tests.
 
+## License
+
+This repository's original documents (including both specification editions), Skill, and maintenance tools use the [Apache License 2.0](LICENSE), including the published Skill `0.1.0` contents. See [NOTICE](NOTICE) for copyright and third-party reference information. The standard license text is in English; project explanations are maintained in both languages.
+
+Referenced third-party standards and projects retain their own licenses. Any future extraction of third-party implementations requires a separate licensing and attribution review.
+
 ## Maintenance
 
 - Maintain integration obligations in the specification, product goals in SPEC, and implementation choices in SDK design. Summaries/examples cannot omit mandatory safeguards/acceptance.
 - This directory is the maintained project home; ResearchStudio retains historical copies rather than another live definition.
 - Product definition, normative rules, implementation design, code, and runtime acceptance remain distinct. A document is not delivered implementation.
 - Use relative links; date/version external source evidence without depending on the author's local paths. Do not rewrite historical review conclusions as approval of later revisions.
-- Do not include real credentials or private configuration. Before later extraction/publication, check source, attribution, and licensing; this directory does not determine a license automatically.
+- Do not include real credentials or private configuration. Check source, attribution, and authorization before extracting third-party code; do not automatically extend this repository's license to third-party material.

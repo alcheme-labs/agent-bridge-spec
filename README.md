@@ -12,7 +12,7 @@
 
 当前规范为 **normative draft 0.3**，SDK 为 **reference design draft 0.3**。在前轮规范/SDK 分离及安全/恢复规则基础上，本轮补充后台受托决定、结构化输出的保证程度，以及主任务时限/预算的通用规则；具体实现和消费者业务继续分开。
 
-前轮 draft 0.2 经独立角色和裁判关闭的 2 项 P2 保留于[规范补齐记录](docs/reviews/2026-11-13-normative-gap-review.md)，不自动覆盖本修订。本轮经两位未参与编写的独立角色及最终裁判核对，未发现需修订的实质文档问题；结论及检查集中在[受托、产出与限制规则记录](docs/reviews/2026-11-13-runtime-rules-review.md)。所有文档结论均不代替实际兼容证明。实际首发引擎/宿主/连接产品、第二真实消费者、独立接入运行证据、分发与许可仍待落实。
+前轮 draft 0.2 经独立角色和裁判关闭的 2 项 P2 保留于[规范补齐记录](docs/reviews/2026-11-13-normative-gap-review.md)，不自动覆盖本修订。本轮经两位未参与编写的独立角色及最终裁判核对，未发现需修订的实质文档问题；结论及检查集中在[受托、产出与限制规则记录](docs/reviews/2026-11-13-runtime-rules-review.md)。所有文档结论均不代替实际兼容证明。实际首发引擎/宿主/连接产品、第二真实消费者、独立接入运行证据、参考 SDK 分发与未来抽取代码的许可核查仍待落实。
 
 2026-11-12 的[三轮 SPEC 评审](docs/reviews/2026-11-12-spec-review.md)关闭了当时确认的 3 项问题，SDK 原设计也有自己的设计复核；这些结论及旧摘要只适用于各自旧版本，不自动覆盖本修订。2026-11-02 的[协议评审](docs/reviews/2026-11-02-protocol-review.md)同样保留为历史。
 
@@ -49,7 +49,7 @@
 
 当前采用完整仓库安装方式：保留本目录结构，让宿主读取 `skills/agent-bridge-integration`；支持符号链接的宿主也可链接到该实际目录。Skill 解析实际目录后读取同版规范正文，不复制或维护另一套规范。只复制 Skill 文件夹不能取得正文。当前没有单独发布的 Skill 安装包，也未修改本机已安装 Skill。
 
-初始版本使用完整仓库的固定标签，或下载该 Release 的源码归档：
+初始版本推荐下载[含许可证的完整源码包](https://github.com/alcheme-labs/agent-bridge-spec/releases/download/agent-bridge-integration-v0.1.0/agent-bridge-spec-0.1.0.tar.gz)。原始发布标签早于许可补充，保持不变；其中的规范与 Skill 也可通过以下方式取得，许可文件在同一 Release 中单独提供：
 
 ```sh
 git clone --branch agent-bridge-integration-v0.1.0 https://github.com/alcheme-labs/agent-bridge-spec.git
@@ -72,10 +72,16 @@ python3 skills/agent-bridge-integration/scripts/check_updates.py check
 
 维护者可手动触发 [Verify published Skill](https://github.com/alcheme-labs/agent-bridge-spec/actions/workflows/verify-skill-release.yml)，在隔离环境核验指定的最新发布标签。也可运行 `python3 -B tests/verify_skill_updates_online.py`；它使用匿名 API 和临时状态，模拟较旧版本，不安装更新或修改已发布源码。此项需要网络，不属于默认离线测试。
 
+## 开源许可
+
+本仓库自有文档（含中英文规范）、Skill 和维护工具统一采用 [Apache License 2.0](LICENSE)，覆盖已发布的 Skill `0.1.0` 内容。版权及第三方引用说明见 [NOTICE](NOTICE)。许可标准正文为英文，中英文项目说明保持同步。
+
+引用的第三方标准与项目保留各自许可；后续若抽取第三方实现，须另外核查其许可与署名要求。
+
 ## 文档维护约定
 
 - 接入义务集中维护在规范，产品规格保留目标，SDK 记录实现选择；摘要和示例不得省略必需安全或验收要求。
 - 本目录是后续主入口；原 ResearchStudio 副本不再维护另一套项目定义。
 - 产品定义、规范、实现设计、实施与运行验收分别表达；不得把文档存在写成已实现。
 - 使用相对链接；引用外部源码时保留来源日期/版本，不依赖当前电脑目录。历史评审摘要不随新修订重写为新版本通过。
-- 不放置真实密钥、令牌、认证文件或私密配置。正式许可在后续抽取前核查来源、署名与授权，本目录不自动确定许可。
+- 不放置真实密钥、令牌、认证文件或私密配置。后续抽取第三方代码前核查来源、署名与授权，不将本仓库许可自动扩展到第三方材料。
