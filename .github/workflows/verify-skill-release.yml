@@ -1,0 +1,40 @@
+name: Verify published Skill
+
+'on':
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Latest published stable Skill tag
+        required: true
+        default: agent-bridge-integration-v0.1.0
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      RELEASE_TAG: ${{ inputs.tag }}
+      REPOSITORY: ${{ github.repository }}
+    steps:
+      - name: Read verification code and published snapshot
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          assert re.fullmatch(r'agent-bridge-integration-v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', os.environ['RELEASE_TAG'])
+          PY
+          git clone --depth 1 "https://github.com/$REPOSITORY.git" "$GITHUB_WORKSPACE/verification"
+          git -C "$GITHUB_WORKSPACE/verification" fetch --depth 1 origin "$GITHUB_SHA"
+          git -C "$GITHUB_WORKSPACE/verification" checkout --detach "$GITHUB_SHA"
+          git clone --depth 1 --branch "$RELEASE_TAG" "https://github.com/$REPOSITORY.git" "$RUNNER_TEMP/skill-release"
+      - name: Run published offline tests
+        working-directory: ${{ runner.temp }}/skill-release
+        run: python3 -B -m unittest discover -s tests -p 'test_skill_updates.py' -v
+      - name: Verify anonymous online checks and persistent notice decisions
+        shell: bash
+        run: python3 -B "$GITHUB_WORKSPACE/verification/tests/verify_skill_updates_online.py" "$RUNNER_TEMP/skill-release"

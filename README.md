@@ -70,6 +70,8 @@ python3 skills/agent-bridge-integration/scripts/check_updates.py check
 
 线上核验须读取实际发布记录，并分别验证已安装版本、较旧版本的新版识别及本机状态去重。各次线上核验的实际结果记录在对应 Release 说明中；本地测试通过不自动证明线上检查成功。
 
+维护者可手动触发 [Verify published Skill](https://github.com/alcheme-labs/agent-bridge-spec/actions/workflows/verify-skill-release.yml)，在隔离环境核验指定的最新发布标签。也可运行 `python3 -B tests/verify_skill_updates_online.py`；它使用匿名 API 和临时状态，模拟较旧版本，不安装更新或修改已发布源码。此项需要网络，不属于默认离线测试。
+
 ## 文档维护约定
 
 - 接入义务集中维护在规范，产品规格保留目标，SDK 记录实现选择；摘要和示例不得省略必需安全或验收要求。

@@ -68,6 +68,8 @@ On 2026-11-13, all 31 local checks, Skill structure validation, relative-link ch
 
 Online verification must read actual published releases and separately check the installed version, newer-version detection for an older installation, and local notification deduplication. Each Release's notes record its actual online results; passing local tests alone does not establish a successful online check.
 
+Maintainers can manually run [Verify published Skill](https://github.com/alcheme-labs/agent-bridge-spec/actions/workflows/verify-skill-release.yml) against the specified newest published tag in an isolated environment. Alternatively run `python3 -B tests/verify_skill_updates_online.py`. It uses the anonymous API and temporary state, simulates an older version, and neither installs updates nor modifies published source. This requires network access and is separate from the default offline tests.
+
 ## Maintenance
 
 - Maintain integration obligations in the specification, product goals in SPEC, and implementation choices in SDK design. Summaries/examples cannot omit mandatory safeguards/acceptance.
