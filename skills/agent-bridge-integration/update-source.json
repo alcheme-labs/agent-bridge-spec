@@ -1,0 +1,5 @@
+{
+  "repository": "alcheme-labs/agent-bridge-spec",
+  "tag_prefix": "agent-bridge-integration-v",
+  "check_interval_hours": 24
+}
